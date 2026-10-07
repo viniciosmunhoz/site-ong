@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>ONG Solidária - Início</title>
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"> 
+        <script src="js/script.js" defer></script>    
+    </head>
+
+    <body>
+        <header class="container">
+            <h1>ONG Solidária</h1>
+
+            <nav aria-label="Navegação principal">
+                <button type="button" 
+                class="menu-button" 
+                aria-controls="menu-principal"
+                aria-expanded="false"
+                aria-label="Abrir menu de navegação">
+                ☰</button>
+                <ul id="menu-principal">
+                    <li><a href="index.html" data-page="inicio">Início</a></li>
+                    <li><a href="projetos.html" data-page="projetos">Projetos</a>
+                        <ul class="submenu">
+                            <li><a href="projetos.html#doacoes">Doações</a></li>
+                            <li><a href="projetos.html#trabvoluntario">Voluntariado</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="cadastro.html" data-page="cadastro">Seja voluntário</a></li>                    
+                </ul>
+            </nav>
+        </header>
+        <main id="app" class="container">
+            <section id="apresentacao">
+                <h2>Quem Somos</h2>
+                <img    
+                src="img/ong.jpg"
+                alt="Voluntários reunidos durante uma ação solidária"
+                >
+                <p>Somos uma organização não governamental dedicada ao desenvolvimento de ações sociais e solidárias, promovendo apoio às comunidades e incentivando a participação de voluntários.</p>
+                <a href="projetos.html">Conheça nossos projetos</a>
+            </section>
+            <section id="atuacao">
+                <h2>Nossa Atuação</h2>
+                <p>Desenvolvemos projetos voltados à assistência social, educação, arrecadação de alimentos e fortalecimento das comunidades.</p>
+                <p>Nossas iniciativas contam com a participação de voluntários, parceiros e doadores interessados em contribuir com ações de impacto social.</p>
+            </section>
+            <section id="participacao">
+                <h2>Faça parte</h2>
+                 <p>Você pode colaborar participando das atividades voluntárias ou contribuindo com nossas campanhas de doação.</p>
+                <a href="cadastro.html">Quero participar</a>  
+            </section>
+        </main>
+<footer class="container">
+    <h2>Entre em contato</h2>
+
+    <address>
+        <p>
+            E-mail:
+            <a href="mailto:contato@exemplo.com">contato@exemplo.com</a>
+        </p>
+
+        <p>
+            Telefone:
+            <a href="tel:+5541999999999">(41) 99999-9999</a>
+        </p>
+
+        <p>Curitiba - PR</p>
+    </address>
+    <p>&copy; 2026 ONG Solidária. Todos os direitos reservados.</p>
+    </footer>
+    </body>
+ 
+</html>
