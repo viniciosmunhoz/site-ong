@@ -13,7 +13,7 @@ const templates = {
 
             <p>Somos uma organização não governamental dedicada ao desenvolvimento de ações sociais e solidárias, promovendo apoio às comunidades e incentivando a participação de voluntários.</p>
 
-            <a href="projetos.html">Conheça nossos projetos</a>
+            <a href="projetos.html" data-page="projetos">Conheça nossos projetos</a>
         </section>
 
         <section id="atuacao">
@@ -29,7 +29,7 @@ const templates = {
 
             <p>Você pode colaborar participando das atividades voluntárias ou contribuindo com nossas campanhas de doação.</p>
 
-            <a href="cadastro.html">Quero participar</a>
+            <a href="cadastro.html" data-page="cadastro">Quero participar</a>
         </section>
     `,
   projetos: `
@@ -45,14 +45,14 @@ const templates = {
                 <article>
                      <span class="badge">Educação</span>
                     <h3>Apoio Educacional</h3>
-                    <p>A iniciativa promove atividades educativas, reforço escolar e distribuição de materiais para crianças e adolescentes.</p>                    
+                    <p>A iniciativa promove atividades educativas, reforço escolar e distribuição de materiais para crianças e adolescentes.</p>
                 </article>
                 <article>
                     <span class="badge">Comunidade</span>
                     <h3>Ações Comunitárias</h3>
                     <p>São realizadas atividades em diferentes comunidades com participação de voluntários e parceiros da organização.</p>
-                </article> 
-                </div>               
+                </article>
+                </div>
             </section>
             <section id="voluntariado">
                 <h2>Trabalho Voluntário</h2>
@@ -63,9 +63,9 @@ const templates = {
                     <li>Apoio em atividades educativas</li>
                     <li>Participação em eventos comunitários</li>
                 </ul>
-            </section> 
+            </section>
             <section id="doacoes">
-                
+
     <h2>Campanhas de Doação</h2>
 
     <p>
@@ -82,7 +82,7 @@ const templates = {
     </ul>
 
     <div class="alerta">
-        <strong>Importante: Antes de realizar uma doação, entre em contato com a ONG para verificar os itens de maior necessidade.</strong> 
+        <strong>Importante: Antes de realizar uma doação, entre em contato com a ONG para verificar os itens de maior necessidade.</strong>
     </div>
 </section>
 
@@ -95,7 +95,7 @@ const templates = {
         gostaria de participar.
     </p>
 
-    <a href="cadastro.html">Realizar cadastro</a>
+    <a href="cadastro.html" data-page="cadastro">Realizar cadastro</a>
 </section>`,
   cadastro: `
     <h2>Cadastro de Voluntários</h2>
@@ -108,12 +108,12 @@ const templates = {
                     <input type="date" id="data" name="data" required>
                     <label for="email">Email:</label>
                     <input type="email" id="email" name="email" required>
-                    <label for="telefone">Telefone:</label>
+                    <label for="telefone" >Telefone:</label>
                     <input type="tel" id="telefone" name="telefone" pattern="\\([0-9]{2}\\) [0-9]{5}-[0-9]{4}" placeholder="(00) 00000-0000" required>
                     <label for="documento-cpf">CPF:</label>
                     <input type="text" id="documento-cpf" name="documento-cpf" pattern="[0-9]{3}\.[0-9]{3}\.[0-9]{3}-[0-9]{2}" inputmode="numeric" placeholder="000.000.000-00" required>
                     <p id="mensagem-cpf"></p>
-                </fieldset>   
+                </fieldset>
              <fieldset>
                 <legend>Endereço</legend>
                     <label for="cep">CEP:</label>
@@ -143,20 +143,21 @@ const templates = {
                  </label>
                 </div>
                 <label for="como-colaborar">Como deseja colaborar?</label>
-                <textarea id="como-colaborar" 
-                name="como-colaborar" rows="4" 
-                cols="50" 
-                placeholder="Descreva como deseja colaborar..." 
+                <textarea id="como-colaborar"
+                name="como-colaborar" rows="4"
+                cols="50"
+                placeholder="Descreva como deseja colaborar..."
                 maxlength="200"></textarea>
                 <p id="contador-caracteres">0/200</p>
              </fieldset>
              <button type="submit">Enviar</button>
             </form>
-            
-            <div id="toast" role="status">
+
+            <div id="toast" class= "toast" role="status">
             Cadastro enviado com sucesso!
             </div>`,
 };
+
 
 botao.addEventListener("click", () => {
   menu.classList.toggle("show");
@@ -177,6 +178,7 @@ function iniciarFormulario() {
   const mensagemCpf = document.getElementById("mensagem-cpf");
   const formulario = document.querySelector("form");
   const mensagemEnvio = document.getElementById("toast");
+  const campoTelefone = document.getElementById ("telefone");
 
   console.log("formulario:", formulario);
   console.log("toast:", mensagemEnvio);
@@ -184,6 +186,25 @@ function iniciarFormulario() {
   if (campoColaboracao) {
     campoColaboracao.addEventListener("input", () => {
       contadorCaracteres.textContent = `${campoColaboracao.value.length}/200`;
+    });
+  }
+
+  if (campoTelefone){
+    campoTelefone.addEventListener("input", () => {
+      const telefoneNumeros = campoTelefone.value.replace(/\D/g, "").slice(0, 11);
+
+      let telefoneFormatado = telefoneNumeros;
+
+      if (telefoneNumeros.length > 2) {
+        telefoneFormatado = "("+ telefoneNumeros.slice(0, 2) + ") " + telefoneNumeros.slice(2);
+      }
+      if (telefoneNumeros.length > 7) {
+        telefoneFormatado = "("+ telefoneNumeros.slice(0, 2) + ")" +
+        " " +
+        telefoneNumeros.slice(2, 7) + "-" + telefoneNumeros.slice(7);
+      }
+
+      campoTelefone.value = telefoneFormatado;
     });
   }
 
@@ -240,6 +261,24 @@ function iniciarFormulario() {
     formulario.addEventListener("submit", (event) => {
       event.preventDefault();
       mensagemEnvio.classList.add("show");
+
+      const novoCadastro = {
+        nome: document.getElementById("nome").value,
+        email: document.getElementById("email").value,
+        telefone: document.getElementById("telefone").value,
+        participacao: document.querySelector('input[name="participacao"]:checked')?.value
+      };
+
+      const cadastrosSalvos =
+    JSON.parse(localStorage.getItem("cadastros")) || [];
+
+cadastrosSalvos.push(novoCadastro);
+
+localStorage.setItem(
+    "cadastros",
+    JSON.stringify(cadastrosSalvos)
+);
+
 
       setTimeout(() => {
         mensagemEnvio.classList.remove("show");
@@ -310,18 +349,55 @@ function validarCpf(cpf) {
 const linksNavegacao = document.querySelectorAll("[data-page]");
 const app = document.getElementById("app");
 
+navegarPara("inicio");
+
 linksNavegacao.forEach((link) => {
   link.addEventListener("click", (event) => {
     event.preventDefault();
 
     const pagina = link.dataset.page;
+    const secao = link.dataset.section;
 
-    app.innerHTML = templates[pagina];
+    navegarPara(pagina);
 
-    console.log("pagina =", pagina);
+    history.pushState({}, "", `?pagina=${pagina}`);
 
-    if (pagina === "cadastro") {
-      iniciarFormulario();
+    window.addEventListener("popstate", () => {
+    const parametros = new URLSearchParams(window.location.search);
+    const pagina = parametros.get("pagina") || "inicio";
+
+    navegarPara(pagina);
+    });
+
+    if (secao){
+      const elementoSecao = document.getElementById(secao);
+
+      if (elementoSecao) {
+        elementoSecao.scrollIntoView();
+        // mande elementoSecao rolar para a tela
+    }
     }
   });
 });
+
+app.addEventListener("click", (event) => {
+    const link = event.target.closest("[data-page]");
+
+    if (!link){
+      return;
+    }
+     event.preventDefault();
+
+    const pagina = link.dataset.page;
+    navegarPara(pagina);
+});
+
+function navegarPara (pagina){
+  app.innerHTML = templates[pagina];
+
+     if (pagina === "cadastro") {
+      iniciarFormulario();
+    }
+}
+
+
