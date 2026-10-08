@@ -7,7 +7,7 @@ const templates = {
             <h2>Quem Somos</h2>
 
             <img
-                src="img/ong.jpg"
+                src="img/ONG.jpg"
                 alt="Voluntários reunidos durante uma ação solidária"
             >
 
